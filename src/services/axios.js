@@ -1,23 +1,14 @@
-import {fetch} from 'whatwg-fetch'
-var baseUrl = 'http://localhost:8000';
-
-var service = {
-  get (url) {
-    return fetch(baseUrl + url)
-    .then(function(response) {
-      return response.json();
-    });
-  },
-  post(url,body) {
-    console.log('mybody',body);
-    fetch(baseUrl + url,{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    });
+import axios from 'axios';
+const getBackendUrl = () => {
+  if (process.env.REACT_APP_HASH !== undefined) {
+    return `https://he-ide.hackerearth.com/${process.env.REACT_APP_HASH}.backend/`;
   }
-}
-
-export default service;
+  return 'http://localhost:8000/';
+};
+const instance = axios.create({
+  baseURL: getBackendUrl(),
+  headers: {
+    'content-type': 'application/x-www-form-urlencoded',
+  },
+});
+export default instance;

@@ -10,12 +10,11 @@ class List extends React.Component{
   render() {
     var listItem =  this.props.items.map(function (items) {
       return (
-        <ListItem style={{textAlign: "center", paddingRight: "50px"}}>
+        <ListItem key = {items.id} style={{textAlign: "center", paddingRight: "50px"}}>
                   <ListItemText
                     primary={items.text}
                   />
         </ListItem>
-        // <ListItem id={items.id} ingredient={items.text} />
       );
     });
 

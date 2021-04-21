@@ -1,5 +1,5 @@
 import React from 'react';
-import HTTP from '../services/httpservice'
+import axios from '../services/axios';
 import List from './List'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -15,9 +15,9 @@ class ListManager extends React.Component{
 
     
     componentWillMount() {
-      HTTP.get('/')
-      .then(function (data) {
-        this.setState({items:data});
+      axios.get('/')
+      .then(function (res) {
+        this.setState({items:res.data});
       }.bind(this));
       console.log(this.state.items);
     }
@@ -41,7 +41,7 @@ class ListManager extends React.Component{
           "text": this.state.newItemText
         };
       }
-      HTTP.post('/',newItem);
+      axios.post('/',newItem);
       currentItems.push(newItem);
       this.setState({ items: currentItems, newItemText: '' });
     }
