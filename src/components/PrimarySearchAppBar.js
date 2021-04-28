@@ -88,16 +88,18 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
   const handlePath = (type) => {
+    let path = '';
+    if (process.env.REACT_APP_HASH !== undefined) {
+        path = `/${process.env.REACT_APP_HASH}`;
+    }
     if(type==='home'){
-      window.location.href = '/';
+      window.location.href = path + '/';
     }
     if(type==='Jobs'){
-      window.location.href = '/jobs';
+      window.location.href = path + '/jobs';
     }
   }
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -144,7 +146,7 @@ export default function PersistentDrawerLeft() {
                 <WorkIcon />
               </ListItemIcon>
               <ListItemText primary={text} />
-            </ListItem>
+            </ListItem>            
           ))}
         </List>
       </Drawer>
